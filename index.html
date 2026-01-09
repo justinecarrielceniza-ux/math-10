@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 10 Math: Union & Intersection</title>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #2980b9;
+            --danger: #c0392b;
+            --light: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--light);
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            transition: all 0.4s ease;
+        }
+
+        /* Discussion Panel */
+        #discussion {
+            flex: 1;
+            padding: 40px;
+            background: var(--white);
+            overflow-y: auto;
+            border-right: 2px solid #ddd;
+            transition: 0.4s;
+        }
+
+        /* Activity Panel */
+        #activity {
+            width: 450px;
+            padding: 30px;
+            background: #dfe6e9;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            transition: 0.4s;
+            position: relative;
+        }
+
+        /* State Classes */
+        .hidden { width: 0 !important; padding: 0 !important; opacity: 0; pointer-events: none; }
+        .full-view { width: 100vw !important; flex: none !important; }
+
+        /* Toolbar */
+        .toolbar {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            border-bottom: 2px solid var(--light);
+            margin-bottom: 20px;
+            z-index: 100;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn-zoom { background: var(--secondary); color: white; }
+        .btn-ppt { background: #d35400; color: white; }
+        .btn-toggle { background: var(--primary); color: white; }
+        .btn-full { background: var(--accent); color: white; }
+        .btn-vid { background: var(--danger); color: white; text-decoration: none; display: inline-flex; align-items: center; padding: 0 15px; border-radius: 6px; font-size: 14px;}
+
+        button:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+        /* Text Content */
+        .zoom-wrapper { transform-origin: top left; transition: transform 0.2s; }
+        .math-block {
+            background: #f8f9fa;
+            border-left: 5px solid var(--accent);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .formula-box {
+            background: #2d3436;
+            color: #fab1a0;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2em;
+            margin: 15px 0;
+        }
+
+        .activity-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            line-height: 1.5;
+        }
+
+        .badge {
+            background: var(--accent);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="mainContainer">
+    <section id="discussion">
+        <div class="toolbar">
+            <button class="btn-zoom" onclick="adjustZoom(0.1)">Zoom In +</button>
+            <button class="btn-zoom" onclick="adjustZoom(-0.1)">Zoom Out -</button>
+            <button class="btn-ppt" onclick="makePPT()">Download PPT</button>
+            <button class="btn-toggle" onclick="toggleActivity()">Hide Activity</button>
+            <a href="https://youtu.be/t-BelFFmol8?si=pAqhC8zkoIIXRHAC" target="_blank" class="btn-vid">Watch Video</a>
+        </div>
+
+        <div class="zoom-wrapper" id="zoomTarget">
+            <h1>Probability: Union and Intersection of Events</h1>
+            <p><strong>Grade 10 Mathematics - 3rd Quarter</strong></p>
+
+            <h3>I. Understanding Sets in Probability</h3>
+            <p>Probability often deals with the relationship between different events within a sample space. We visualize these relationships using Venn Diagrams.</p>
+            
+            
+
+            <div class="math-block">
+                <h4>1. Union of Events (A ∪ B)</h4>
+                <p>The <strong>Union</strong> represents the event that occurs if A occurs, OR B occurs, OR both occur. In a set, it combines all unique elements from both groups.</p>
+                
+                <h4>2. Intersection of Events (A ∩ B)</h4>
+                <p>The <strong>Intersection</strong> represents the event that occurs only if BOTH A and B occur at the same time. It is the overlapping region in a Venn diagram.</p>
+            </div>
+
+            <h3>II. The Addition Rule Formula</h3>
+            <p>To calculate the probability of the union of two events, we use the General Addition Rule:</p>
+            
+            <div class="formula-box">
+                P(A ∪ B) = P(A) + P(B) - P(A ∩ B)
+            </div>
+
+            <p><strong>Why the subtraction?</strong> If we simply added P(A) and P(B), the outcomes in the intersection (the overlap) would be counted twice. Subtracting the intersection once ensures an accurate total.</p>
+
+            <h3>III. Mutually Exclusive Events</h3>
+            <p>Events are <strong>Mutually Exclusive</strong> if they cannot happen at the same time. For example, when rolling a single die, you cannot roll a '2' and a '5' simultaneously.</p>
+            <p>For these events: <strong>P(A ∩ B) = 0</strong>, so the formula simplifies to: <br><em>P(A ∪ B) = P(A) + P(B)</em>.</p>
+            
+            
+        </div>
+    </section>
+
+    <section id="activity">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="margin: 0;">Activity Task</h2>
+            <button class="btn-full" id="fullBtn" onclick="toggleFullView()">Full View</button>
+        </div>
+        <div id="activity-list"></div>
+    </section>
+</div>
+
+<script>
+    // 1. Zoom Logic
+    let currentScale = 1;
+    function adjustZoom(amount) {
+        currentScale += amount;
+        document.getElementById('zoomTarget').style.transform = `scale(${currentScale})`;
+    }
+
+    // 2. View Toggles
+    function toggleActivity() {
+        const act = document.getElementById('activity');
+        const btn = event.target;
+        act.classList.toggle('hidden');
+        btn.innerText = act.classList.contains('hidden') ? "Show Activity" : "Hide Activity";
+    }
+
+    function toggleFullView() {
+        const act = document.getElementById('activity');
+        const disc = document.getElementById('discussion');
+        const btn = document.getElementById('fullBtn');
+        
+        act.classList.toggle('full-view');
+        if(act.classList.contains('full-view')) {
+            disc.style.display = 'none';
+            btn.innerText = "Exit Full View";
+        } else {
+            disc.style.display = 'block';
+            btn.innerText = "Full View";
+        }
+    }
+
+    // 3. Populate Activity Items (based on Lesson Plan Rubric)
+    const items = [
+        {cat: "Definition", q: "Define the union of two events (A ∪ B) and explain what 'all outcomes in A, B, or both' means."},
+        {cat: "Definition", q: "Define the intersection of two events (A ∩ B) and identify which region it represents in a Venn diagram."},
+        {cat: "Application", q: "Given Set A = {1, 2, 3, 4} and Set B = {3, 4, 5, 6}, find A ∪ B."},
+        {cat: "Application", q: "Given Set A = {1, 2, 3, 4} and Set B = {3, 4, 5, 6}, find A ∩ B."},
+        {cat: "Probability", q: "If P(A) = 0.4, P(B) = 0.5, and P(A ∩ B) = 0.2, calculate P(A ∪ B) using the formula."},
+        {cat: "Visual", q: "Draw a Venn diagram where event A and event B have no intersection. What are these events called?"},
+        {cat: "Concept", q: "Explain why we subtract the intersection when calculating the union of two non-mutually exclusive events."},
+        {cat: "Cards", q: "In a deck of cards, find the probability of picking a Queen (Event A) OR a Diamond (Event B)."},
+        {cat: "Dice", q: "If you roll a die, find the probability that the result is an odd number OR a number greater than 3."},
+        {cat: "Real-world", q: "In a group of 50 students, 20 like Basketball and 25 like Volleyball. 10 like both. Find the probability that a random student likes Basketball OR Volleyball."}
+    ];
+
+    const listContainer = document.getElementById('activity-list');
+    items.forEach((item, i) => {
+        listContainer.innerHTML += `
+            <div class="activity-card">
+                <span class="badge">${item.cat}</span><br>
+                <strong>Question ${i+1}:</strong> ${item.q}
+            </div>`;
+    });
+
+    // 4. PPTX Generator
+    function makePPT() {
+        let pptx = new PptxGenJS();
+        
+        // Slide 1: Title
+        let s1 = pptx.addSlide();
+        s1.addText("Grade 10 Mathematics", { x:1, y:1, w:'80%', fontSize:36, bold:true, align:'center', color:'2980b9' });
+        s1.addText("Union and Intersection of Events", { x:1, y:2, w:'80%', fontSize:24, align:'center' });
+
+        // Slide 2: Concepts
+        let s2 = pptx.addSlide();
+        s2.addText("Key Concepts", { x:0.5, y:0.5, fontSize:28, bold:true });
+        s2.addBullet({ text: "Union (A ∪ B): Outcomes in A, B, or both.", options: { x:1, y:1.5, fontSize:20 } });
+        s2.addBullet({ text: "Intersection (A ∩ B): Outcomes in BOTH A and B.", options: { x:1, y:2.2, fontSize:20 } });
+
+        // Slide 3: Formula
+        let s3 = pptx.addSlide();
+        s3.addText("The Addition Rule", { x:0.5, y:0.5, fontSize:28, bold:true });
+        s3.addText("P(A ∪ B) = P(A) + P(B) - P(A ∩ B)", { x:0.5, y:1.8, w:'90%', h:1, fontSize:32, color:'c0392b', align:'center', bold:true });
+        s3.addText("Always subtract the overlap to prevent double-counting!", { x:0.5, y:3, fontSize:16, italic:true });
+
+        pptx.writeFile({ fileName: "Grade10_Probability_Lesson.pptx" });
+    }
+</script>
+
+</body>
+</html>
